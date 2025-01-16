@@ -1,3 +1,6 @@
-body {background-color: #D4EBF8;}
+body {background-color: #E38E49;}
 h1 {color: #0A3981;}
-.body {border-color: #E38E49;}
+.body {background-color: #D4EBF8;
+margin: 20px;
+border-radius: 10px;
+text-align: center;}
