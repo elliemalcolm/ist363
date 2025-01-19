@@ -1,6 +1,37 @@
-body {background-color: #E38E49;}
+body {background-color: #E38E49;
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+display: flex;
+padding: 20px;
+justify-content: center;
+align-items: center;
+margin: 0;}
+
 h1 {color: #0A3981;}
+
+
+.textandimages{ flex-direction: column;
+max-width: 680px;
+margin: 0 auto;}
+
+
+
 .body {background-color: #D4EBF8;
-margin: 20px;
-border-radius: 10px;
-text-align: center;}
+    padding: 50px;
+    margin: 20px;
+    border-radius: 10px;
+    width: 100%;
+    text-align: left;
+    align-items: center;
+justify-content: center;
+    }
+
+.images {max-width: 800px;
+}
+.images img {width: 100%;}
+.text {max-width: 700px;}
+
+
+@media (min-width: 600px) {
+    .images { grid-template-columns: repeat(2, 1fr); }}
+@media (max-width: 599px) {
+    .images { grid-template-columns: 1fr; }}
