@@ -10,10 +10,10 @@ transition: 1s;
 .circle:hover {background-color: blue;
 transform: rotate(360deg);}
 
-img {
+ img {
     position: absolute;
-    top: -50px;
-    left: -50px;
+    top: 200px;
+    left: -100px;
     animation-name: otto;
     animation-duration: 3s;
     animation-fill-mode: forwards;
@@ -21,5 +21,5 @@ img {
 
 @keyframes otto {
     from {transform: translateX(0); }
-    to {transform: translateX(1500px);}
+    to {transform: translateX(1600px);}
 }
