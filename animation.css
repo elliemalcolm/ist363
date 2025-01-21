@@ -9,3 +9,17 @@ transition: 1s;
 }
 .circle:hover {background-color: blue;
 transform: rotate(360deg);}
+
+img {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    animation-name: otto;
+    animation-duration: 3s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes otto {
+    from {transform: translateX(0); }
+    to {transform: translateX(1500px);}
+}
