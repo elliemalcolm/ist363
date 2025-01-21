@@ -15,7 +15,7 @@ transform: rotate(360deg);}
     top: 200px;
     left: -100px;
     animation-name: otto;
-    animation-duration: 3s;
+    animation-duration: 5s;
     animation-fill-mode: forwards;
 }
 
