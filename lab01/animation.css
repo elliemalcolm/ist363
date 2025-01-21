@@ -1,0 +1,9 @@
+.circle {background-color: aqua;
+width: 70px;
+text-align: center;
+padding: 20px;
+border-radius: 50%;
+transition: 1s;
+}
+.circle:hover {background-color: blue;
+transform: rotate(360deg);}
