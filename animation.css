@@ -17,6 +17,7 @@ transform: rotate(360deg);}
     animation-name: otto;
     animation-duration: 5s;
     animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
 }
 
 @keyframes otto {
