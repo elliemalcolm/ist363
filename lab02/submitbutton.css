@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .submit-button {
+    position: relative;
+    padding: 15px 30px;
+    background-color: white;
+    color: orange;
+    border: 2px solid orange;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 25px; 
+    transition: all 0.3s ease;
+  }
+
+  .submit-button::after {
+    content: "";
+    position: absolute;
+    left: 5px; 
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: white;  
+    opacity: 0; 
+    transition: opacity 0.3s ease;
+  }
+  
+  .submit-button:active {
+    background-color: orange;
+    color: white;
+    border-color: white;
+    transform: scale(1.1); 
+  }
+  
+  .submit-button:active::after {
+    content: "\2713"; 
+    opacity: 1; 
+  }
