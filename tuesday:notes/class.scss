@@ -1,0 +1,34 @@
+@import "reset"
+
+$heading_color:#00ff00;
+$main_font: Arial, Helvetica, sans-serif;
+
+h1 {
+    color: $heading_color;
+}
+
+@mixin warning {
+    color: #00f;
+    background-color: lightblue;
+
+}
+
+.danger {
+    @include warning;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+
+/* extend */
+
+.jumbotron {
+    width: 100%;
+    background-color: lightcoral;
+    border: 2px solid navy;
+}
+
+/* "jumbotron" not important, can use any name (ex. bigheading) */
+.jumbotron_about {
+    @extend .jumbotron;
+    color: gray;
+}
