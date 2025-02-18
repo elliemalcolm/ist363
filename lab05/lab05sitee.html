@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a href="Camera Icon" class="navbar-brand">
+                <img src="../lab05/images/logo.png" alt="Camera" width="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Portfolio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-lg text-center mt-5 px-5">
+        <h1 class="display-6" >Portfolio</h1>
+        <div class="row g-3 mt-4">
+            <!-- Two Stacked Images on the Left -->
+            <div class="col-lg-3 d-flex flex-column">
+                <img src="images/blue-flower-5158746_1280.jpg" class="img-fluid mb-3" alt="Portfolio Image">
+                <img src="images/architecture-1868667_1280.jpg" class="img-fluid" alt="Portfolio Image">
+            </div>
+            <div class="col-lg-3 d-flex flex-column">
+                <img src="images/mountains.jpg" class="img-fluid mb-3" alt="Portfolio Image">
+                <img src="images/lake-8763490_1280.jpg" class="img-fluid" alt="Portfolio Image">
+            </div>
+            <!-- Large Image on the Right -->
+             <div class="col-lg-6">
+                <img src="images/clouds-3353159_1280.jpg" class="img-fluid w-100 h-100" style="object-fit: cover;" alt="Portfolio Image">
+            </div>
+            <!-- Second Row: Four Images -->
+             <div class="col-lg-3"><img src="images/plum-2679782_1280.jpg" class="img-fluid" alt="Portfolio Image"></div>
+             <div class="col-lg-3"><img src="images/snow-7658399_1280.jpg" class="img-fluid" alt="Portfolio Image"></div>
+             <div class="col-lg-3"><img src="images/blue-eryngo-7319904_1280.jpg" class="img-fluid" alt="Portfolio Image"></div>
+             <div class="col-lg-3"><img src="images/art-2578353_1280.jpg" class="img-fluid" alt="Portfolio Image"></div>
+            </div>
+            <button class="btn btn-primary mt-4">See More</button>
+        </div>
+            
+        
+
+    <!-- Call to Action Buttons -->
+    <div class="container text-center mt-4">
+        <button class="btn btn-primary btn-lg hover-effect">See More</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="container-fluid text-center mt-5 py-3 bg-light">
+      <h2>About the Artist</h2>
+        <p> Capturing moments through the lens, my passion is bringing emotions to life in every frame.</p>
+        <button class="btn btn-outline-dark btn-md hover-effect">Read More</button>
+    </footer>
+</body>
+</html>
