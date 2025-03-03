@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="lab07.js"></script>
+</head>
+<body>
+
+    <script>
+            let myVar = 1000;
+            console.log("My variable is " + myVar + ".")
+
+            let favNumber = 9;
+            console.log("My favorite number is:", favNumber);
+            console.log(this);
+
+            let colors = ["red", "blue", "green", "yellow"];
+            console.log(colors[0]); //ouputs red
+            console.log(colors[2]); //outputs green
+
+            let favoriteFoods = ["Pizza", "Sushi", "Burgers", "Pasta"];
+            console.log(favoriteFoods[1]);  // Print the second item in the array
+
+            favoriteFoods.push("Tacos"); // Add a new food to the array
+            console.log(favoriteFoods);  // Print the entire updated array
+            for (let i = 0; i < favoriteFoods.length; i++) { // array that loops favorite foods
+                console.log(`Favorite Food ${i + 1}: ${favoriteFoods[i]}`);
+            }
+
+            for (let i = 0; i < favoriteFoods.length; i++) { // this logs the favoriteFoods array and skips logging the second entry
+            if (i === 1) {                                  
+            continue; // Skip the second item (index 1)
+            }
+            console.log(`Favorite Food ${i + 1}: ${favoriteFoods[i]}`);
+            }
+
+            // example of array that loops over the colors array
+            for (let i = 0; i < colors.length; i++) {
+                console.log(colors[i]);
+            }
+
+            let book = {  // #5 in lab, 
+            title: "The Great Gatsby",
+            author: "F. Scott Fitzgerald",
+            yearPublished: 1925,
+            isAvailable: true
+            };
+
+            // Print the book’s title and author
+            console.log(`Title: ${book.title}`);
+            console.log(`Author: ${book.author}`);
+
+            // Check if the book is available
+            if (book.isAvailable) {
+                console.log("This book is available for checkout.");
+            } else {
+                console.log("Sorry, this book is currently checked out.");
+            }
+
+            let number = 2; // Start with the first even number
+            while (number <= 20) {
+            console.log(number);
+            number += 2; // Increment by 2 to get the next even number
+            }
+
+            let roll = Math.floor(Math.random() * 6) + 1;
+            console.log(`You rolled a ${roll}`);
+
+
+    </script>
+
+    
+</body>
+</html>
