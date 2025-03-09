@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monster Game</title>
+    <title>Fireball Duel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
@@ -15,23 +15,52 @@
         .chars img {width: 100%;}
         .fireball img {width: 80px;}
         .fireball {flex: 4;}
-        #fireballleft {position: absolute; left: 180px; top: 150px; transition: all 2s ease-in-out;}
-        #fireballright {rotate: 180deg; position: absolute; rotate: 180deg; left: 500px; top: 150px; transition: all 2s ease-in-out;}
-        .medievalsharp-regular {font-family: "MedievalSharp", cursive; font-weight: 400; font-style: normal;}
-        button { background: #ffbf7f; background-image: -webkit-linear-gradient(top, #ffbf7f, #ff8000); background-image: -moz-linear-gradient(top, #ffbf7f, #ff8000); background-image: -ms-linear-gradient(top, #ffbf7f, #ff8000); background-image: -o-linear-gradient(top, #ffbf7f, #ff8000); background-image: linear-gradient(to bottom, #ffbf7f, #ff8000); color: white; border: 0px; padding: 10px 20px 10px 20px; }
-        button:hover {background: #ff8000; background-image: -webkit-linear-gradient(top, #ff8000, #ff8000); background-image: -moz-linear-gradient(top, #ff8000, #ff8000); background-image: -ms-linear-gradient(top, #ff8000, #ff8000); background-image: -o-linear-gradient(top, #ff8000, #ff8000); background-image: linear-gradient(to bottom, #ff8000, #ff8000); }        
-        p { font-size: 20px;font-weight: bold;text-align: center;width: 100%;}
-        .animate-left {animation: moveLeft 1s ease-in-out;}
-        .animate-right {animation: moveRight 1s ease-in-out;}
         
-        @keyframes moveRight { 
-        0% { transform: translateX(0); }
-        100% { transform: translateX(250px); } 
+        /* Fireball start positions */
+        #fireballleft {
+            position: absolute;
+            left: 180px; /* Starts near the monster */
+            top: 150px;
+            transition: all 1s ease-in-out;
         }
-        
-        @keyframes moveLeft { 
-        0% { transform: translateX(0); }
-        100% { transform: translateX(-250px); } 
+
+        #fireballright {
+            position: absolute;
+            left: 500px; /* Starts near the girl */
+            top: 150px;
+            transform: scaleX(-1); /* Flips fireball to face left */
+            transition: all 1s ease-in-out;
+        }
+
+        .medievalsharp-regular {font-family: "MedievalSharp", cursive; font-weight: 400; font-style: normal;}
+        button {
+            background: #ffbf7f;
+            background-image: linear-gradient(to bottom, #ffbf7f, #ff8000);
+            color: white;
+            border: 0px;
+            padding: 10px 20px;
+        }
+        button:hover { background: #ff8000; }
+
+        p { font-size: 20px; font-weight: bold; text-align: center; width: 100%; }
+
+        /* Fireball animations */
+        .animate-monster {
+            animation: moveRight 1s ease-in-out;
+        }
+
+        .animate-girl {
+            animation: moveLeft 1s ease-in-out;
+        }
+
+        @keyframes moveRight {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(250px); } /* Moves RIGHT */
+        }
+
+        @keyframes moveLeft {
+            0% { transform: translateX(0) scaleX(-1); } /* Keep flipped */
+            100% { transform: translateX(-250px) scaleX(-1); } /* Moves LEFT while staying flipped */
         }
     </style>
 </head>
@@ -54,11 +83,9 @@
     </div>
 
     <script>
-        // Global variables for shield strength
         let monsterShield = 100;
         let girlShield = 100;
 
-        // Add event listener to the button
         document.querySelector("button").addEventListener("click", playGame);
 
         function playGame() {
@@ -84,21 +111,23 @@
         }
 
         function animateFireball() {
-            let leftFireball = document.getElementById("fireballleft");
-            let rightFireball = document.getElementById("fireballright");
+            let leftFireball = document.getElementById("fireballleft");  // Monster's fireball
+            let rightFireball = document.getElementById("fireballright"); // Girl's fireball
 
-            // Remove previous animation classes
-            leftFireball.classList.remove("animate-left");
-            rightFireball.classList.remove("animate-right");
+            // Reset animations
+            leftFireball.classList.remove("animate-monster");
+            rightFireball.classList.remove("animate-girl");
 
             // Force reflow (triggers re-animation)
             void leftFireball.offsetWidth;
             void rightFireball.offsetWidth;
 
-            // Re-add animation classes
-            leftFireball.classList.add("animate-left");
-            rightFireball.classList.add("animate-right");
+            // Start animations
+            leftFireball.classList.add("animate-monster"); // Moves right
+            rightFireball.classList.add("animate-girl");   // Moves left
         }
     </script>
 </body>
 </html>
+
+
