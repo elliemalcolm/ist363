@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex justify-center items-center min-h-screen bg-gray-100">
+    <div class="bg-orange-500 text-white p-6 rounded-2xl shadow-lg w-80 text-center">
+        <h1 class="text-xl font-bold">Current Weather</h1>
+        <div id="weather" class="mt-4 text-lg"></div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const weatherEndpoint = "https://api.open-meteo.com/v1/forecast?latitude=43.0481&longitude=-76.1474&current=precipitation,temperature_2m,cloudcover&temperature_unit=fahrenheit&precipitation_unit=inch&timezone=America/New_York";
+            
+            function displayWeather(data) {
+                const weatherDiv = document.getElementById("weather");
+                if (!data || !data.current) {
+                    weatherDiv.innerHTML = "Could not fetch weather data.";
+                    return;
+                }
+                
+                const temperature = data.current.temperature_2m;
+                const precipitation = data.current.precipitation;
+                const cloudCover = data.current.cloudcover;
+                
+                // Determine cloud cover emoji
+                const cloudEmoji = cloudCover > 50 ? "☁️" : "☀️";
+                
+                weatherDiv.innerHTML = `
+                    <p>Precipitation: ${precipitation}"</p>
+                    <p>Temperature: ${temperature}°F</p>
+                    <div class="text-4xl mt-2">${cloudEmoji}</div>
+                `;
+            }
+            
+            function fetchWeather() {
+                const request = new XMLHttpRequest();
+                request.open("GET", weatherEndpoint);
+                request.onreadystatechange = function () {
+                    if (request.readyState === 4) {
+                        if (request.status === 200) {
+                            const responseData = JSON.parse(request.responseText);
+                            displayWeather(responseData);
+                        } else {
+                            displayWeather(null);
+                        }
+                    }
+                };
+                request.send();
+            }
+            
+            fetchWeather();
+        });
+    </script>
+</body>
+</html>
