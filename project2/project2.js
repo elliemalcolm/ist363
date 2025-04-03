@@ -1,4 +1,4 @@
-const API_KEY = 'YOUR_TMDB_API_KEY'; // Replace with your TMDB API Key
+const API_KEY = '4ffa4200c7480f14add4cecc685ebb2c'; // Replace with your TMDB API Key
 const TMDB_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
 
 async function fetchMovies() {
