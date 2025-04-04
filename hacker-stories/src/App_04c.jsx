@@ -23,6 +23,7 @@ function App() {
     { id: 1, task: "Complete Lab 11", completed: false },
     { id: 2, task: "Review JSX Events and State", completed: false }
   ]);
+
   const [newTask, setNewTask] = useState("");
 
   const toggleTask = (id) => {
@@ -33,17 +34,16 @@ function App() {
     );
   };
 
-  const addTask = (event) => {
-    event.preventDefault(); 
+  const addTask = () => {
     if (newTask.trim() === "") return;
 
     const newTaskObj = {
-      id: tasks.length + 1, 
+      id: tasks.length + 1,
       task: newTask,
       completed: false
     };
 
-    setTasks([...tasks, newTaskObj]); 
+    setTasks([...tasks, newTaskObj]);
     setNewTask(""); 
   };
 
@@ -67,50 +67,28 @@ function App() {
 
       {/* To-Do List */}
       <h1>To-Do List</h1>
-      <form onSubmit={addTask}>
-        <input
-          type="text"
-          placeholder="Enter a task"
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-          style={{ marginRight: "10px", padding: "5px" }}
-        />
-        <button type="submit" style={{ padding: "5px 10px" }}>
-          Add Task
-        </button>
-      </form>
-
+      <input
+        type="text"
+        placeholder="Add a new task"
+        value={newTask}
+        onChange={(e) => setNewTask(e.target.value)}
+      />
+      <button onClick={addTask}>Add Task</button>
       <ul>
         {tasks.map((task) => (
-          <li key={task.id} style={{ display: "flex", alignItems: "center" }}>
-            <span
-              style={{
-                textDecoration: task.completed ? "line-through" : "none",
-                cursor: "pointer",
-                flexGrow: 1
-              }}
-            >
-              {task.task}
-            </span>
-            <button
-              onClick={() => toggleTask(task.id)}
-              style={{
-                marginLeft: "10px",
-                backgroundColor: "red",
-                color: "white",
-                border: "none",
-                padding: "5px",
-                cursor: "pointer",
-                fontSize: "14px"
-              }}
-            >
-              ❌
-            </button>
+          <li
+            key={task.id}
+            onClick={() => toggleTask(task.id)}
+            style={{
+              textDecoration: task.completed ? "line-through" : "none",
+              cursor: "pointer"
+            }}
+          >
+            {task.task}
           </li>
         ))}
       </ul>
     </div>
   );
 }
-
 export default App;
