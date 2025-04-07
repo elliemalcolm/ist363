@@ -3,10 +3,10 @@ const YOUTUBE_API_KEY = 'AIzaSyCty5k_cNWx-gujhCL0bkJNb2JrwkXfJek';
 
 const TMDB_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
 
-// Favorite Movie Titles
+// Movie Titles
 const favoriteTitles = ["The Grinch", "Someone Great", "The Hangover"];
 
-// Fetch Popular Movies
+// Popular Movies
 async function fetchMovies() {
   try {
     const response = await fetch(TMDB_URL);
@@ -18,7 +18,6 @@ async function fetchMovies() {
   }
 }
 
-// Fetch Movie Info by Title (for Favorites)
 async function fetchMovieByTitle(title) {
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(title)}`;
 
@@ -26,14 +25,14 @@ async function fetchMovieByTitle(title) {
     const response = await fetch(url);
     if (!response.ok) throw new Error('Failed to search movie');
     const data = await response.json();
-    return data.results[0]; // Return the first match
+    return data.results[0]; 
   } catch (error) {
     console.error('Error fetching movie by title:', error);
     return null;
   }
 }
 
-// Fetch YouTube Trailer
+// YouTube Trailer
 async function fetchYouTubeTrailer(title) {
   const YOUTUBE_URL = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(title + " official trailer")}&key=${YOUTUBE_API_KEY}&type=video`;
 
@@ -52,7 +51,6 @@ async function fetchYouTubeTrailer(title) {
   }
 }
 
-// Display Movies in Given Container
 async function displayMoviesWithTrailers(movies, containerId) {
   const container = document.getElementById(containerId);
   container.innerHTML = '';
@@ -79,7 +77,6 @@ async function displayMoviesWithTrailers(movies, containerId) {
   }
 }
 
-// Load Favorite Movies
 async function loadFavoriteMovies() {
   const favoriteMovies = [];
 
@@ -90,7 +87,5 @@ async function loadFavoriteMovies() {
 
   displayMoviesWithTrailers(favoriteMovies, 'favorites-container');
 }
-
-// Initialize both sections
 loadFavoriteMovies();
 fetchMovies();
