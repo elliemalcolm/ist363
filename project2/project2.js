@@ -1,82 +1,96 @@
 const API_KEY = '4ffa4200c7480f14add4cecc685ebb2c';
+const YOUTUBE_API_KEY = 'AIzaSyCty5k_cNWx-gujhCL0bkJNb2JrwkXfJek';
+
 const TMDB_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-const YOUTUBE_API_KEY = 'AIzaSyCty5k_cNWx-gujhCL0bkJNb2JrwkXfJek'; 
 
-// Fetch Popular Movies from TMDB
+// Favorite Movie Titles
+const favoriteTitles = ["The Grinch", "Someone Great", "The Hangover"];
+
+// Fetch Popular Movies
 async function fetchMovies() {
-    try {
-        const response = await fetch(TMDB_URL);
-        if (!response.ok) throw new Error('Failed to fetch movies');
-        const data = await response.json();
-        displayMoviesWithTrailers(data.results); // Pass movies to display function
-    } catch (error) {
-        console.error('Error fetching movies:', error);
-    }
+  try {
+    const response = await fetch(TMDB_URL);
+    if (!response.ok) throw new Error('Failed to fetch movies');
+    const data = await response.json();
+    displayMoviesWithTrailers(data.results, 'movies-container');
+  } catch (error) {
+    console.error('Error fetching movies:', error);
+  }
 }
 
-// Fetch YouTube Trailer based on movie title
-async function fetchYouTubeTrailer(movieTitle) {
-    const YOUTUBE_URL = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(movieTitle + " official trailer")}&key=${YOUTUBE_API_KEY}&type=video`;
+// Fetch Movie Info by Title (for Favorites)
+async function fetchMovieByTitle(title) {
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(title)}`;
 
-    try {
-        const response = await fetch(YOUTUBE_URL);
-        if (!response.ok) throw new Error("Failed to fetch YouTube trailer");
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Failed to search movie');
+    const data = await response.json();
+    return data.results[0]; // Return the first match
+  } catch (error) {
+    console.error('Error fetching movie by title:', error);
+    return null;
+  }
+}
 
-        const data = await response.json();
+// Fetch YouTube Trailer
+async function fetchYouTubeTrailer(title) {
+  const YOUTUBE_URL = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(title + " official trailer")}&key=${YOUTUBE_API_KEY}&type=video`;
 
-        // Debugging: Log the response data to ensure we're getting something back
-        console.log("YouTube API response:", data);
+  try {
+    const response = await fetch(YOUTUBE_URL);
+    if (!response.ok) throw new Error("Failed to fetch trailer");
+    const data = await response.json();
+    if (data.items.length > 0) {
+      return `https://www.youtube.com/embed/${data.items[0].id.videoId}`;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.error("YouTube trailer error:", error);
+    return null;
+  }
+}
 
-        if (data.items && data.items.length > 0) {
-            const videoId = data.items[0].id.videoId;
-            console.log("Video ID:", videoId); // Debugging: Log video ID
-            return `https://www.youtube.com/embed/${videoId}`;
-        } else {
-            console.log("No trailer found for movie:", movieTitle);
-            return null; // No trailer found
+// Display Movies in Given Container
+async function displayMoviesWithTrailers(movies, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+
+  for (const movie of movies) {
+    const trailerUrl = await fetchYouTubeTrailer(movie.title || movie.original_title);
+    const posterUrl = movie.poster_path
+      ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+      : 'https://via.placeholder.com/500x750?text=No+Image';
+
+    const card = `
+      <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+        <img src="${posterUrl}" alt="${movie.title}" class="rounded-md">
+        <h3 class="text-lg font-semibold mt-2">${movie.title}</h3>
+        <p class="text-sm text-gray-400">⭐ ${movie.vote_average || 'N/A'} | 🗓️ ${movie.release_date || 'Unknown'}</p>
+        ${
+          trailerUrl
+            ? `<iframe class="w-full h-48 mt-2" src="${trailerUrl}" frameborder="0" allowfullscreen></iframe>`
+            : `<p class="text-gray-400 mt-2">No trailer available</p>`
         }
-    } catch (error) {
-        console.error("Error fetching YouTube trailer:", error);
-        return null;
-    }
+      </div>
+    `;
+    container.innerHTML += card;
+  }
 }
 
-// Display Movies with YouTube Trailers
-async function displayMoviesWithTrailers(movies) {
-    const moviesContainer = document.getElementById('movies-container');
-    moviesContainer.innerHTML = ''; // Clear previous content
+// Load Favorite Movies
+async function loadFavoriteMovies() {
+  const favoriteMovies = [];
 
-    // Loop through the movies array and create movie cards with trailers
-    for (const movie of movies) {
-        console.log('Movie title:', movie.title); // Debugging: Log movie titles
-        const trailerUrl = await fetchYouTubeTrailer(movie.title); // Get YouTube trailer
-        console.log("Trailer URL for movie:", movie.title, trailerUrl); // Debugging: Log trailer URL
+  for (const title of favoriteTitles) {
+    const movie = await fetchMovieByTitle(title);
+    if (movie) favoriteMovies.push(movie);
+  }
 
-        if (trailerUrl) {
-            const movieCard = `
-                <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
-                    <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" class="rounded-md">
-                    <h3 class="text-lg font-semibold mt-2">${movie.title}</h3>
-                    <p class="text-sm text-gray-400">⭐ ${movie.vote_average} | 🗓️ ${movie.release_date}</p>
-                    <iframe class="w-full h-48 mt-2" src="${trailerUrl}" frameborder="0" allowfullscreen></iframe>
-                </div>
-            `;
-            moviesContainer.innerHTML += movieCard;
-        } else {
-            // If no trailer is found, still display movie poster
-            const movieCard = `
-                <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
-                    <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" class="rounded-md">
-                    <h3 class="text-lg font-semibold mt-2">${movie.title}</h3>
-                    <p class="text-sm text-gray-400">⭐ ${movie.vote_average} | 🗓️ ${movie.release_date}</p>
-                    <p class="text-gray-400 mt-2">No trailer available</p>
-                </div>
-            `;
-            moviesContainer.innerHTML += movieCard;
-        }
-    }
+  displayMoviesWithTrailers(favoriteMovies, 'favorites-container');
 }
 
-// Fetch movies on page load
+// Initialize both sections
+loadFavoriteMovies();
 fetchMovies();
-
