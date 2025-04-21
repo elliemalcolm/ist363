@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile - Movie + Book Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen flex flex-col">
+
+  <!-- Top Navigation -->
+  <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-blue-600">Movie + Book Portal</h1>
+    <div class="flex items-center space-x-6">
+      <a href="index.html" class="text-blue-600 hover:underline">Home Page</a>
+      <a href="find.html" class="text-blue-600 hover:underline">Find More</a>
+      <a href="profile.html" class="text-blue-600 hover:text-blue-800">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+          viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M5.121 17.804A9.969 9.969 0 0112 15c2.21 0 4.253.713 5.879 1.804M15 11a3 3 0 11-6 0 3 3 0 016 0zm6 1a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Profile Content -->
+  <main class="p-8 flex-1">
+    <h2 class="text-3xl font-bold mb-6">Your Profile</h2>
+
+    <!-- User Info -->
+    <section class="bg-white shadow-md rounded-xl p-6 mb-8">
+      <h3 class="text-xl font-semibold mb-2">User Information</h3>
+      <p><span class="font-medium">Username:</span> bookmoviefan123</p>
+      <p><span class="font-medium">Email:</span> user@example.com</p>
+    </section>
+
+    <!-- Activity Summary -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div class="bg-white shadow-md rounded-xl p-6">
+        <h4 class="text-lg font-semibold">Books Logged</h4>
+        <p class="text-2xl font-bold text-blue-600">8</p>
+      </div>
+      <div class="bg-white shadow-md rounded-xl p-6">
+        <h4 class="text-lg font-semibold">Movies Logged</h4>
+        <p class="text-2xl font-bold text-red-600">7</p>
+      </div>
+      <div class="bg-white shadow-md rounded-xl p-6">
+        <h4 class="text-lg font-semibold">Most Preferred Format</h4>
+        <p class="text-lg mt-1">📚 <span class="font-bold text-purple-600">Books</span></p>
+      </div>
+    </section>
+
+    <!-- Logged Titles -->
+    <section>
+      <h3 class="text-2xl font-semibold mb-4">Recently Logged</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="bg-white shadow-md rounded-xl p-4">
+          <h4 class="text-lg font-bold">The Maze Runner</h4>
+          <p class="text-sm text-gray-600">⭐️⭐️⭐️⭐️</p>
+          <p class="text-sm">Preferred: <span class="font-semibold text-purple-600">Book</span></p>
+        </div>
+        <div class="bg-white shadow-md rounded-xl p-4">
+          <h4 class="text-lg font-bold">Divergent</h4>
+          <p class="text-sm text-gray-600">⭐️⭐️⭐️</p>
+          <p class="text-sm">Preferred: <span class="font-semibold text-green-600">Movie</span></p>
+        </div>
+        <div class="bg-white shadow-md rounded-xl p-4">
+          <h4 class="text-lg font-bold">The Giver</h4>
+          <p class="text-sm text-gray-600">⭐️⭐️⭐️⭐️</p>
+          <p class="text-sm">Preferred: <span class="font-semibold text-purple-600">Book</span></p>
+        </div>
+        <div class="bg-white shadow-md rounded-xl p-4">
+          <h4 class="text-lg font-bold">The Great Gatsby</h4>
+          <p class="text-sm text-gray-600">⭐️⭐️⭐️⭐️⭐️</p>
+          <p class="text-sm">Preferred: <span class="font-semibold text-green-600">Movie</span></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</body>
+</html>
