@@ -1,54 +1,41 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Bootstrap styles
-import 'bootstrap/dist/js/bootstrap.bundle.min'; // Bootstrap JavaScript
+import { useState } from "react";
 
-// Import Pages
-import HomePage from './pages/HomePage';
-import Profile from './pages/Profile';
-import FindMore from './pages/FindMore';
+const students = [
+  {suid: 123456, name: 'Sue Flay', year: 'senior', major: 'Applied Data Analytics'}, 
+  {suid: 234567, name: 'Ella Vader', year: 'junior', major: 'Information Management and Technology'}, 
+  {suid: 345678, name: 'Chris P Bacon', year: 'junior', major: 'Innovation, Society and Technology'}
+];
 
 function App() {
+  let [filteredStudents, setFilteredStudents] = useState(students);
+   
+  const handleChange = (event) => {
+    setFilteredStudents(
+      students.filter(student => 
+        student.name.toLowerCase().includes(event.target.value.toLowerCase())
+      )
+    );}
+  
   return (
-    <Router>
-      <div>
-        {/* Navbar */}
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-          <div className="container-fluid">
-            <Link className="navbar-brand" to="/">Book & Movie Portal</Link>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav ms-auto">
-                <li className="nav-item">
-                  <Link className="nav-link" to="/">Home</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/find-more">Find More</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/profile">Profile</Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-
-        {/* Main Content */}
-        <div className="container-fluid d-flex justify-content-center align-items-center min-vh-100">
-          <div className="w-100 p-3">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/find-more" element={<FindMore />} />
-              <Route path="/profile" element={<Profile />} />
-            </Routes>
-          </div>
-        </div>
-      </div>
-    </Router>
-  );
-}
+  <div>
+    <label htmlFor="search">Search: </label>
+    <input id="search" type="text" onChange={handleChange} />
+    <h1>Students</h1>
+    <ul>
+  {filteredStudents.map(function (item) {
+    return (
+      <li key={item.suid}>
+        Name: {item.name}
+        <br />
+        Year: {item.year}
+        <br />
+        Major: {item.major}
+      </li>
+    );
+  })}
+</ul>
+  </div>
+      );
+    };  
 
 export default App;
